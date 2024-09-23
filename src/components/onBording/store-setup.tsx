@@ -17,7 +17,11 @@ interface StoreSetupProps {
   setStoreEmail: (value: string) => void;
   category: string;
   setCategory: (value: string) => void;
+  image: string;
+  setImage: (value: string) => void;
 }
+
+interface ProductImagesProps {}
 
 const StoreSetup: React.FC<StoreSetupProps> = ({
   storeName,
@@ -30,16 +34,39 @@ const StoreSetup: React.FC<StoreSetupProps> = ({
   setStoreEmail,
   category,
   setCategory,
+  setImage,
+  image,
 }) => {
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files) {
+      const imageUrl = URL.createObjectURL(files[0]);
+      setImage(imageUrl);
+    }
+  };
   return (
     <div className="flex flex-col items-start lg:items-center gap-6 h-full w-full">
       <div className="flex w-full h-full items-center justify-center flex-row">
-        <button className="flex flex-col border border-gray-300 h-auto w-[95%] p-4 items-center justify-center rounded-md my-2">
+        <label
+          htmlFor="image-upload"
+          className="flex flex-col border border-gray-300 h-auto w-[95%] p-4 items-center justify-center rounded-md my-2"
+        >
           <div className="w-[20%] lg:w-[10%] lg:h-[10%] h-[20%] flex items-center justify-center relative rounded-full">
             <Image
               className="w-full h-full rounded-full"
               alt="Store Image"
-              src={storeImage}
+              width={10}
+              height={10}
+              objectFit="scale-down"
+              src={image ? image : storeImage}
+            />
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageUpload}
+              className="hidden "
+              id="image-upload"
             />
             <div className="absolute inset-0 flex items-center justify-center">
               <Image src={addPhoto} alt="Add Photo" className="w-6 h-6" />
@@ -48,7 +75,7 @@ const StoreSetup: React.FC<StoreSetupProps> = ({
           <p className="text-sm text-gray-600 mt-4 text-center">
             Upload store logo
           </p>
-        </button>
+        </label>
       </div>
 
       <div className="flex flex-col w-full gap-4 max-w-md">
