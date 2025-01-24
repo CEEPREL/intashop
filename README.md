@@ -12,7 +12,7 @@ Responsive Design: Stores look great on any device, from desktops to smartphones
 React, Next.js, Tailwind CSS
 
 Deployment: Vercel
-📦 Getting Started
+📦 Getting Started.
 
 
 <img width="1430" alt="Screen Shot 2024-10-14 at 6 50 40 AM" src="https://github.com/user-attachments/assets/d28fb05b-22d7-4163-a067-4df2c48bf14a">
